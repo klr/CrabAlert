@@ -2,7 +2,7 @@
 
 CrabAlert is a macOS status bar application that notifies you of incoming messages in [MailCrab](https://github.com/tweedegolf/mailcrab).
 
-<!-- TODO: add screenshot -->
+<img src="screenshot.png" width="641">
 
 ## Features
 
