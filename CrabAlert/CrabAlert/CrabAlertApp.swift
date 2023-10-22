@@ -22,6 +22,7 @@ struct IncomingMessage: Codable {
     let has_html: Bool
     let has_plain: Bool
     let attachments: [String]
+    var body: String?
     
     struct Contact: Codable {
         let name: String?
@@ -127,7 +128,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let content = UNMutableNotificationContent()
         content.title = message.subject
         content.subtitle = "From: \(message.from.email)"
-        content.body = "Received at: \(message.date)"
+        content.body = message.body ?? ""
         content.userInfo = ["url": "http://localhost:1080/"]
         content.sound = UNNotificationSound.default
 
@@ -151,6 +152,45 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return nil
         }
     }
+    
+    func fetchMessageBody(for id: String, completion: @escaping (String?, Error?) -> Void) {
+        let baseURL = "http://localhost:1080/api/message"
+        let url = URL(string: "\(baseURL)/\(id)/body")!
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = data,
+                  let body = String(data: data, encoding: .utf8) else {
+                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch body"]))
+                return
+            }
+            
+            completion(body, nil)
+        }
+        
+        task.resume()
+    }
+    
+    func convertHTMLToPlainText(html: String) -> String? {
+        guard let data = html.data(using: .utf8) else {
+            return nil
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
+            return nil
+        }
+        
+        return attributedString.string
+    }
 }
 
 // MARK: - WebSocketDelegate
@@ -168,8 +208,17 @@ extension AppDelegate: WebSocketDelegate {
         case .text(let text):
             print("Received text: \(text)")
             
-            if let data = text.data(using: .utf8), let message = parseIncomingMessage(data: data) {
-                showNotification(with: message)
+            if let data = text.data(using: .utf8), var message = parseIncomingMessage(data: data) {
+                fetchMessageBody(for: message.id) { (body, error) in
+                    if let error = error {
+                        print("Error fetching body: \(error)")
+                    } else if let body = body {
+                        if let plainText = self.convertHTMLToPlainText(html: body) {
+                            message.body = plainText
+                            self.showNotification(with: message)
+                        }
+                    }
+                }
             }
         case .binary(let data):
             print("Received data: \(data.count)")
