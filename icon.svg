@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <filter id="shadow" bx:pinned="true">
+      <title>Drop Shadow</title>
+      <feDropShadow result="drop-shadow-0" in="SourceGraphic" style="flood-opacity: 0.3;" stdDeviation="10" dx="0" dy="10"/>
+    </filter>
+    <bx:guide x="-10" y="100" angle="90"/>
+    <bx:guide x="100" y="-10" angle="0"/>
+    <bx:guide x="924" y="-10" angle="0"/>
+    <bx:guide x="-10" y="924" angle="90"/>
+    <clipPath id="clip-0">
+      <path style="stroke-width: 3px; fill: rgb(255, 255, 255);" d="M 100 724 L 100 300 C 100 185.001 170 99.995 300.026 100 L 724 99.995 C 854 100 924 185.001 924 300 L 924 724 C 924 839.001 854 923.995 724 924 L 300.026 924 C 170 924 100 839.001 100 724 Z">
+        <title>Icon Mask</title>
+      </path>
+    </clipPath>
+    <symbol id="symbol-0" viewBox="0 0 1024 1024" bx:pinned="true">
+      <title>App Icon Guides</title>
+      <g style="" transform="matrix(1, 0, 0, 1, 0, 0)">
+        <title>App Icon Guides</title>
+        <path style="fill: none; stroke: rgb(145, 145, 145); stroke-width: 3px;" d="M 0 739.001 L 0 285.001 C 0 135.001 112 0 284.999 0 L 739.001 0 C 912 0 1024 135.001 1024 285.001 L 1024 739.001 C 1024 889.001 912 1024 739.001 1024 L 284.999 1024 C 112 1024 0 889.001 0 739.001 Z">
+          <title>Outer Bounding Box</title>
+        </path>
+        <path style="stroke: rgb(145, 145, 145); fill: none; stroke-width: 3px;" d="M 50 739.001 L 50 285.001 C 50 162 140 50 284.999 50 L 739.001 50 C 884.001 50 974 162 974 285.001 L 974 739.001 C 974 862 884.001 974 739.001 974 L 284.999 974 C 140 974 50 862 50 739.001 Z">
+          <title>Inner Bounding Box</title>
+        </path>
+        <path style="fill: none; stroke: rgb(255, 0, 0); stroke-width: 3px;" d="M 100 724.005 L 100 300.005 C 100 185.006 170 100 300.026 100.005 L 724 100 C 854 100.005 924 185.006 924 300.005 L 924 724.005 C 924 839.006 854 924 724 924.005 L 300.026 924.005 C 170 924.005 100 839.006 100 724.005 Z">
+          <title>Icon Grid Bounding Box</title>
+        </path>
+        <path style="fill: none; stroke: rgb(255, 0, 0);" d="M 154.017 870.001 L 870.001 870.001 L 870.001 154.014 L 154.017 154.014 L 154.017 870.001 Z M 154.017 870.001 L 870.001 154.014 L 154.017 870.001 Z M 100 511.995 L 924 511.995 L 100 511.995 Z M 100 669.36 L 924 669.36 L 100 669.36 Z M 924 354.631 L 100 354.631 L 924 354.631 Z M 669.365 99.995 L 669.365 923.995 L 669.365 99.995 Z M 354.635 923.995 L 354.635 99.995 L 354.635 923.995 Z M 512 99.995 L 512 923.995 L 512 99.995 Z M 154.017 154.014 L 870.001 870.001 L 154.017 154.014 Z">
+          <title>Icon Grid</title>
+        </path>
+        <circle style="fill: none; stroke: rgba(255, 0, 0, 0.6);" cx="512" cy="511.995" r="157.397">
+          <title>Grid Circle 1</title>
+        </circle>
+        <circle style="fill: none; stroke: rgba(255, 0, 0, 0.6);" cx="512" cy="511.995" r="222.577">
+          <title>Grid Circle 2</title>
+        </circle>
+        <circle style="fill: none; stroke: rgba(255, 0, 0, 0.6);" cx="512" cy="511.995" r="358.001">
+          <title>Grid Circle 3</title>
+        </circle>
+        <path d="M 1084.343 548.001 L 143.343 548.001 C 114.624 548.001 91.343 524.72 91.343 496.001 C 91.343 467.282 114.624 444.001 143.343 444.001 L 1084.343 444.001 C 1113.062 444.001 1136.343 467.282 1136.343 496.001 C 1136.343 524.72 1113.062 548.001 1084.343 548.001 Z M 1136.3 496.039 L 91.3 495.961" style="stroke-width: 5px; fill: rgba(0, 195, 255, 0.37); stroke: rgb(0, 119, 255); stroke-dasharray: 24, 10;" transform="matrix(0.430444, -0.902617, 0.902617, 0.430444, -98.093403, 836.54613)">
+          <title>Tool Angle</title>
+        </path>
+      </g>
+    </symbol>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="512" y1="99.995" x2="512" y2="924" id="gradient-0">
+      <stop offset="0" style="stop-color: rgba(255, 148, 60, 1)"/>
+      <stop offset="1" style="stop-color: rgba(213, 96, 0, 1)"/>
+    </linearGradient>
+    <filter id="drop-shadow-filter-0" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%" bx:preset="drop-shadow 1 0 10 10 0.75 rgba(0,0,0,0.3)">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dx="0" dy="10"/>
+      <feComponentTransfer result="offsetblur">
+        <feFuncA id="spread-ctrl" type="linear" slope="1.5"/>
+      </feComponentTransfer>
+      <feFlood flood-color="rgba(0,0,0,0.3)"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="inner-shadow-filter-0" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%" bx:preset="inner-shadow 1 0 12 10 0.12 rgba(0,0,0,0.7)">
+      <feOffset dx="0" dy="12"/>
+      <feGaussianBlur stdDeviation="10"/>
+      <feComposite operator="out" in="SourceGraphic"/>
+      <feComponentTransfer result="choke">
+        <feFuncA type="linear" slope="0.24"/>
+      </feComponentTransfer>
+      <feFlood flood-color="rgba(0,0,0,0.7)" result="color"/>
+      <feComposite operator="in" in="color" in2="choke" result="shadow"/>
+      <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g style="filter: url(#shadow);">
+    <title>App Icon (w/ Shadow)</title>
+    <g style="clip-path: url(#clip-0);">
+      <title>Background (Masked)</title>
+      <path style="stroke-width: 3px; paint-order: fill; fill-rule: nonzero; fill: url('#gradient-0');" d="M 100 724 L 100 300 C 100 185.001 170 99.995 300.026 100 L 724 99.995 C 854 100 924 185.001 924 300 L 924 724 C 924 839.001 854 923.995 724 924 L 300.026 924 C 170 924 100 839.001 100 724 Z">
+        <title>Icon Shape</title>
+      </path>
+    </g>
+  </g>
+  <use width="1024" height="1024" transform="matrix(1, 0, 0, 1, 0.0000010000001111620804, 0.0000010000001111620804)" style="pointer-events: none; visibility: hidden;" xlink:href="#symbol-0">
+    <title>App Icon Guides</title>
+  </use>
+  <g id="XMLID_229_" transform="matrix(1.333333, 0, 0, 1.333333, 272, 272)" style="filter: url('#drop-shadow-filter-0');">
+    <title>Crab</title>
+    <g>
+      <path d="M340,182.5c0,13.785-11.215,25-25,25h-17.978c-3.467-11.457-9.85-22.081-18.529-31.417 c8.314-6.404,14.751-15.123,18.334-25.191C336.651,143.064,360,107.785,360,72.499C360,32.5,330,22.5,330,22.5c0,30-20,50-20,50 v-40c-50,10-50,80-50,100c0,8.271-6.729,15-15,15h-9.98c-6.539-2.535-13.43-4.628-20.601-6.236 c2.663-6.915,4.7-15.567,5.353-26.322c6.1-3.426,10.229-9.947,10.229-17.441c0-11.045-8.955-20-20-20c-11.046,0-20,8.955-20,20 c0,7.292,3.915,13.654,9.746,17.148c-0.758,10.686-3.157,18.237-5.798,23.46c-4.577-0.397-9.229-0.608-13.948-0.608 s-9.371,0.211-13.948,0.608c-2.641-5.223-5.04-12.774-5.798-23.46c5.831-3.495,9.746-9.856,9.746-17.148c0-11.045-8.954-20-20-20 c-11.045,0-20,8.955-20,20c0,7.494,4.129,14.016,10.229,17.441c0.652,10.755,2.689,19.408,5.353,26.322 c-7.171,1.608-14.062,3.702-20.601,6.236H115c-8.271,0-15-6.729-15-15c0-20,0-90-50-100v40c0,0-20-20-20-50c0,0-30,10-30,49.999 c0,35.286,23.349,70.564,63.174,78.392c3.583,10.068,10.02,18.788,18.334,25.191c-8.68,9.335-15.063,19.96-18.529,31.417H45 c-13.785,0-25-11.215-25-25v-25H0v25c0,24.813,20.187,45,45,45h15c0,6.874,1.032,13.567,2.979,20H45c-24.813,0-45,20.187-45,45v25 h20v-25c0-13.785,11.215-25,25-25h27.483c2.763,4.169,5.938,8.156,9.497,11.928C63.496,285.026,50,302.213,50,322.5v15h20v-15 c0-13.785,11.215-25,25-25h9.582c20.608,12.505,46.844,20,75.418,20c28.573,0,54.809-7.495,75.418-20H265 c13.785,0,25,11.215,25,25v15h20v-15c0-20.287-13.496-37.475-31.98-43.072c3.559-3.771,6.734-7.759,9.497-11.928H315 c13.785,0,25,11.215,25,25v25h20v-25c0-24.813-20.186-45-45-45h-17.978c1.946-6.433,2.978-13.126,2.978-20h15 c24.814,0,45-20.187,45-45v-25h-20V182.5z" style="fill: rgb(255, 255, 255); filter: url('#inner-shadow-filter-0');"/>
+    </g>
+  </g>
+</svg>

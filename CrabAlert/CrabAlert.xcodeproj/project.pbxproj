@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D55BACC12AE47063002F2406 /* CrabAlertApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BACC02AE47063002F2406 /* CrabAlertApp.swift */; };
+		D55BACC52AE47064002F2406 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D55BACC42AE47064002F2406 /* Assets.xcassets */; };
+		D55BACC82AE47064002F2406 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D55BACC72AE47064002F2406 /* Preview Assets.xcassets */; };
+		D55BACD32AE47064002F2406 /* CrabAlertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BACD22AE47064002F2406 /* CrabAlertTests.swift */; };
+		D55BACDD2AE47064002F2406 /* CrabAlertUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BACDC2AE47064002F2406 /* CrabAlertUITests.swift */; };
+		D55BACDF2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BACDE2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift */; };
+		D55BACED2AE470B4002F2406 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = D55BACEC2AE470B4002F2406 /* Starscream */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D55BACCF2AE47064002F2406 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D55BACB52AE47063002F2406 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D55BACBC2AE47063002F2406;
+			remoteInfo = CrabAlert;
+		};
+		D55BACD92AE47064002F2406 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D55BACB52AE47063002F2406 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D55BACBC2AE47063002F2406;
+			remoteInfo = CrabAlert;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D55BACBD2AE47063002F2406 /* CrabAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrabAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D55BACC02AE47063002F2406 /* CrabAlertApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrabAlertApp.swift; sourceTree = "<group>"; };
+		D55BACC42AE47064002F2406 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D55BACC72AE47064002F2406 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D55BACC92AE47064002F2406 /* CrabAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrabAlert.entitlements; sourceTree = "<group>"; };
+		D55BACCE2AE47064002F2406 /* CrabAlertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrabAlertTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D55BACD22AE47064002F2406 /* CrabAlertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrabAlertTests.swift; sourceTree = "<group>"; };
+		D55BACD82AE47064002F2406 /* CrabAlertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrabAlertUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D55BACDC2AE47064002F2406 /* CrabAlertUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrabAlertUITests.swift; sourceTree = "<group>"; };
+		D55BACDE2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrabAlertUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D55BACBA2AE47063002F2406 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D55BACED2AE470B4002F2406 /* Starscream in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55BACCB2AE47064002F2406 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55BACD52AE47064002F2406 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D55BACB42AE47063002F2406 = {
+			isa = PBXGroup;
+			children = (
+				D55BACBF2AE47063002F2406 /* CrabAlert */,
+				D55BACD12AE47064002F2406 /* CrabAlertTests */,
+				D55BACDB2AE47064002F2406 /* CrabAlertUITests */,
+				D55BACBE2AE47063002F2406 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D55BACBE2AE47063002F2406 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D55BACBD2AE47063002F2406 /* CrabAlert.app */,
+				D55BACCE2AE47064002F2406 /* CrabAlertTests.xctest */,
+				D55BACD82AE47064002F2406 /* CrabAlertUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D55BACBF2AE47063002F2406 /* CrabAlert */ = {
+			isa = PBXGroup;
+			children = (
+				D55BACC02AE47063002F2406 /* CrabAlertApp.swift */,
+				D55BACC42AE47064002F2406 /* Assets.xcassets */,
+				D55BACC92AE47064002F2406 /* CrabAlert.entitlements */,
+				D55BACC62AE47064002F2406 /* Preview Content */,
+			);
+			path = CrabAlert;
+			sourceTree = "<group>";
+		};
+		D55BACC62AE47064002F2406 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D55BACC72AE47064002F2406 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D55BACD12AE47064002F2406 /* CrabAlertTests */ = {
+			isa = PBXGroup;
+			children = (
+				D55BACD22AE47064002F2406 /* CrabAlertTests.swift */,
+			);
+			path = CrabAlertTests;
+			sourceTree = "<group>";
+		};
+		D55BACDB2AE47064002F2406 /* CrabAlertUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D55BACDC2AE47064002F2406 /* CrabAlertUITests.swift */,
+				D55BACDE2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift */,
+			);
+			path = CrabAlertUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D55BACBC2AE47063002F2406 /* CrabAlert */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D55BACE22AE47064002F2406 /* Build configuration list for PBXNativeTarget "CrabAlert" */;
+			buildPhases = (
+				D55BACB92AE47063002F2406 /* Sources */,
+				D55BACBA2AE47063002F2406 /* Frameworks */,
+				D55BACBB2AE47063002F2406 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CrabAlert;
+			packageProductDependencies = (
+				D55BACEC2AE470B4002F2406 /* Starscream */,
+			);
+			productName = CrabAlert;
+			productReference = D55BACBD2AE47063002F2406 /* CrabAlert.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D55BACCD2AE47064002F2406 /* CrabAlertTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D55BACE52AE47064002F2406 /* Build configuration list for PBXNativeTarget "CrabAlertTests" */;
+			buildPhases = (
+				D55BACCA2AE47064002F2406 /* Sources */,
+				D55BACCB2AE47064002F2406 /* Frameworks */,
+				D55BACCC2AE47064002F2406 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D55BACD02AE47064002F2406 /* PBXTargetDependency */,
+			);
+			name = CrabAlertTests;
+			productName = CrabAlertTests;
+			productReference = D55BACCE2AE47064002F2406 /* CrabAlertTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D55BACD72AE47064002F2406 /* CrabAlertUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D55BACE82AE47064002F2406 /* Build configuration list for PBXNativeTarget "CrabAlertUITests" */;
+			buildPhases = (
+				D55BACD42AE47064002F2406 /* Sources */,
+				D55BACD52AE47064002F2406 /* Frameworks */,
+				D55BACD62AE47064002F2406 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D55BACDA2AE47064002F2406 /* PBXTargetDependency */,
+			);
+			name = CrabAlertUITests;
+			productName = CrabAlertUITests;
+			productReference = D55BACD82AE47064002F2406 /* CrabAlertUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D55BACB52AE47063002F2406 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					D55BACBC2AE47063002F2406 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					D55BACCD2AE47064002F2406 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = D55BACBC2AE47063002F2406;
+					};
+					D55BACD72AE47064002F2406 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = D55BACBC2AE47063002F2406;
+					};
+				};
+			};
+			buildConfigurationList = D55BACB82AE47063002F2406 /* Build configuration list for PBXProject "CrabAlert" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D55BACB42AE47063002F2406;
+			packageReferences = (
+				D55BACEB2AE470B4002F2406 /* XCRemoteSwiftPackageReference "Starscream" */,
+			);
+			productRefGroup = D55BACBE2AE47063002F2406 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D55BACBC2AE47063002F2406 /* CrabAlert */,
+				D55BACCD2AE47064002F2406 /* CrabAlertTests */,
+				D55BACD72AE47064002F2406 /* CrabAlertUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D55BACBB2AE47063002F2406 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D55BACC82AE47064002F2406 /* Preview Assets.xcassets in Resources */,
+				D55BACC52AE47064002F2406 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55BACCC2AE47064002F2406 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55BACD62AE47064002F2406 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D55BACB92AE47063002F2406 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D55BACC12AE47063002F2406 /* CrabAlertApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55BACCA2AE47064002F2406 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D55BACD32AE47064002F2406 /* CrabAlertTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55BACD42AE47064002F2406 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D55BACDD2AE47064002F2406 /* CrabAlertUITests.swift in Sources */,
+				D55BACDF2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D55BACD02AE47064002F2406 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D55BACBC2AE47063002F2406 /* CrabAlert */;
+			targetProxy = D55BACCF2AE47064002F2406 /* PBXContainerItemProxy */;
+		};
+		D55BACDA2AE47064002F2406 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D55BACBC2AE47063002F2406 /* CrabAlert */;
+			targetProxy = D55BACD92AE47064002F2406 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D55BACE02AE47064002F2406 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D55BACE12AE47064002F2406 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		D55BACE32AE47064002F2406 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CrabAlert/CrabAlert.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CrabAlert/Preview Content\"";
+				DEVELOPMENT_TEAM = D4PDPKBLXX;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CrabAlert;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D55BACE42AE47064002F2406 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CrabAlert/CrabAlert.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CrabAlert/Preview Content\"";
+				DEVELOPMENT_TEAM = D4PDPKBLXX;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CrabAlert;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D55BACE62AE47064002F2406 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D4PDPKBLXX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlertTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrabAlert.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CrabAlert";
+			};
+			name = Debug;
+		};
+		D55BACE72AE47064002F2406 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D4PDPKBLXX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlertTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrabAlert.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CrabAlert";
+			};
+			name = Release;
+		};
+		D55BACE92AE47064002F2406 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D4PDPKBLXX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlertUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = CrabAlert;
+			};
+			name = Debug;
+		};
+		D55BACEA2AE47064002F2406 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D4PDPKBLXX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlertUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = CrabAlert;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D55BACB82AE47063002F2406 /* Build configuration list for PBXProject "CrabAlert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D55BACE02AE47064002F2406 /* Debug */,
+				D55BACE12AE47064002F2406 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D55BACE22AE47064002F2406 /* Build configuration list for PBXNativeTarget "CrabAlert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D55BACE32AE47064002F2406 /* Debug */,
+				D55BACE42AE47064002F2406 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D55BACE52AE47064002F2406 /* Build configuration list for PBXNativeTarget "CrabAlertTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D55BACE62AE47064002F2406 /* Debug */,
+				D55BACE72AE47064002F2406 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D55BACE82AE47064002F2406 /* Build configuration list for PBXNativeTarget "CrabAlertUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D55BACE92AE47064002F2406 /* Debug */,
+				D55BACEA2AE47064002F2406 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D55BACEB2AE470B4002F2406 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D55BACEC2AE470B4002F2406 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D55BACEB2AE470B4002F2406 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D55BACB52AE47063002F2406 /* Project object */;
+}
