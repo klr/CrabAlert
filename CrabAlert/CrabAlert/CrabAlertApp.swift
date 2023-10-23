@@ -70,7 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func setupMenuIcon() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "envelope.fill", accessibilityDescription: "CrabAlert")
+            button.image = NSImage(systemSymbolName: "envelope", accessibilityDescription: "CrabAlert")
         }
         
         statusMenu = NSMenu(title: "Status Menu")
