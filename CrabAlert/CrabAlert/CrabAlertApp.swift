@@ -179,18 +179,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let data = html.data(using: .utf8) else {
             return nil
         }
-        
+
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
-        
+
         guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
             return nil
         }
+
+        // Replace newlines with spaces and trim whitespace
+        var plainText = attributedString.string
+            .replacingOccurrences(of: "\n", with: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return attributedString.string
+        // Limit to 200 characters
+        return plainText.count > 200 ? String(plainText.prefix(200)) : plainText
     }
+
 }
 
 // MARK: - WebSocketDelegate
