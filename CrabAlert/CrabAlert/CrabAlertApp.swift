@@ -190,7 +190,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         // Replace newlines with spaces and trim whitespace
-        var plainText = attributedString.string
+        let plainText = attributedString.string
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
         
