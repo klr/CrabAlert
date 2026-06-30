@@ -32,84 +32,120 @@ struct IncomingMessage: Codable {
 
 @main
 struct CrabAlertApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @NSApplicationDelegateAdaptor(WindowlessAppDelegate.self) private var appDelegate
+    @StateObject private var crabAlert = CrabAlertModel()
 
     var body: some Scene {
-        Settings {
-            EmptyView()
+        MenuBarExtra {
+            if crabAlert.isConnected {
+                Button(action: crabAlert.openMailCrabInbox) {
+                    Label {
+                        Text("Connected to MailCrab")
+                    } icon: {
+                        Image(nsImage: CrabAlertModel.statusIndicatorImage(color: .systemGreen))
+                            .renderingMode(.original)
+                    }
+                }
+            } else {
+                Button(action: {}) {
+                    Label {
+                        Text("Waiting for MailCrab...")
+                    } icon: {
+                        Image(nsImage: CrabAlertModel.statusIndicatorImage(color: .systemGray))
+                            .renderingMode(.original)
+                    }
+                }
+                .disabled(true)
+            }
+
+            Divider()
+
+            Button("Quit CrabAlert", action: crabAlert.quitApp)
+                .keyboardShortcut("q")
+        } label: {
+            Label("CrabAlert", systemImage: crabAlert.isConnected ? "envelope.fill" : "envelope")
         }
+        .menuBarExtraStyle(.menu)
     }
 }
 
 // MARK: - App Delegate
-class AppDelegate: NSObject, NSApplicationDelegate {
-    var socket: WebSocket!
-    var statusItem: NSStatusItem?
-    var statusMenu: NSMenu!
-    var statusMenuItem: NSMenuItem!
-    var isConnected: Bool = false {
-        didSet {
-            updateMenuIcon()
-        }
+class WindowlessAppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        NSApplication.shared.setActivationPolicy(.accessory)
     }
 
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        return false
+    }
+
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
+        false
+    }
+}
+
+// MARK: - CrabAlert Controller
+class CrabAlertModel: NSObject, ObservableObject {
+    private let mailCrabInboxURL = URL(string: "http://localhost:1080/")!
+    private var socket: WebSocket?
+    private var reconnectTimer: Timer?
+
+    @Published var isConnected = false
+
     // MARK: - Lifecycle
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        setupMenuIcon()
+    override init() {
+        super.init()
         setupNotifications()
         connect()
 
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+        reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            guard let self else { return }
+
             if !self.isConnected {
                 self.connect()
             }
         }
     }
-    
+
+    deinit {
+        reconnectTimer?.invalidate()
+        socket?.disconnect()
+    }
+
     // MARK: - Menu Bar Handling
-    func setupMenuIcon() {
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "envelope", accessibilityDescription: "CrabAlert")
+    static func statusIndicatorImage(color: NSColor) -> NSImage {
+        let size = NSSize(width: 12, height: 12)
+        let image = NSImage(size: size, flipped: false) { rect in
+            let dotRect = NSRect(x: rect.midX - 4, y: rect.midY - 4, width: 8, height: 8)
+            color.setFill()
+            NSBezierPath(ovalIn: dotRect).fill()
+            return true
         }
-        
-        statusMenu = NSMenu(title: "Status Menu")
-        
-        // Menu item for displaying the connection status
-        statusMenuItem = NSMenuItem(title: isConnected ? "Connected to MailCrab" : "Waiting for MailCrab...", action: nil, keyEquivalent: "")
-        statusMenuItem.isEnabled = false  // Make it unclickable
-        statusMenu.addItem(statusMenuItem)
-        
-        // Separator
-        statusMenu.addItem(NSMenuItem.separator())
-        
-        // Quit menu item
-        let quitMenuItem = NSMenuItem(title: "Quit CrabAlert", action: #selector(quitApp), keyEquivalent: "q")
-        statusMenu.addItem(quitMenuItem)
-        
-        statusItem?.menu = statusMenu
+        image.isTemplate = false
+        return image
     }
-    
-    func updateMenuIcon() {
-        if isConnected {
-            statusItem?.button?.image = NSImage(systemSymbolName: "envelope.fill", accessibilityDescription: "CrabAlert")
-            statusMenuItem.title = "Connected to MailCrab"
-        } else {
-            statusItem?.button?.image = NSImage(systemSymbolName: "envelope", accessibilityDescription: "CrabAlert")
-            statusMenuItem.title = "Waiting for MailCrab..."
-        }
+
+    func openMailCrabInbox() {
+        NSWorkspace.shared.open(mailCrabInboxURL)
     }
-    
-    @objc func quitApp() {
+
+    func quitApp() {
         NSApplication.shared.terminate(self)
     }
     
     // MARK: - Web Socket Interaction
     func connect() {
         let request = URLRequest(url: URL(string: "ws://localhost:1080/ws")!)
-        socket = WebSocket(request: request)
+        let socket = WebSocket(request: request)
         socket.delegate = self
+        self.socket = socket
         socket.connect()
+    }
+
+    func setConnectionState(_ connected: Bool) {
+        DispatchQueue.main.async {
+            self.isConnected = connected
+        }
     }
     
     // MARK: - Notifications
@@ -129,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         content.title = message.subject
         content.subtitle = "From: \(message.from.email)"
         content.body = message.body ?? ""
-        content.userInfo = ["url": "http://localhost:1080/"]
+        content.userInfo = ["url": mailCrabInboxURL.absoluteString]
         content.sound = UNNotificationSound.default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
@@ -201,17 +237,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 // MARK: - WebSocketDelegate
-extension AppDelegate: WebSocketDelegate {
+extension CrabAlertModel: WebSocketDelegate {
     func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
         switch event {
         case .connected(let headers):
             print("websocket is connected: \(headers)")
 
-            isConnected = true
+            setConnectionState(true)
         case .disconnected(let reason, let code):
             print("websocket is disconnected: \(reason) with code: \(code)")
 
-            isConnected = false
+            setConnectionState(false)
         case .text(let text):
             print("Received text: \(text)")
             
@@ -240,21 +276,21 @@ extension AppDelegate: WebSocketDelegate {
         case .cancelled:
             print("Websocket was cancelled")
 
-            isConnected = false
+            setConnectionState(false)
         case .error(let error):
             print("Error: \(error?.localizedDescription ?? "Unknown error")")
 
-            isConnected = false
+            setConnectionState(false)
         case .peerClosed:
             print("Peer closed")
             
-            isConnected = false
+            setConnectionState(false)
         }
     }
 }
 
 // MARK: - UNUserNotificationCenterDelegate
-extension AppDelegate: UNUserNotificationCenterDelegate {
+extension CrabAlertModel: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
