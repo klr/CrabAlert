@@ -13,7 +13,9 @@
 		D55BACD32AE47064002F2406 /* CrabAlertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BACD22AE47064002F2406 /* CrabAlertTests.swift */; };
 		D55BACDD2AE47064002F2406 /* CrabAlertUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BACDC2AE47064002F2406 /* CrabAlertUITests.swift */; };
 		D55BACDF2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BACDE2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift */; };
-		D55BACED2AE470B4002F2406 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = D55BACEC2AE470B4002F2406 /* Starscream */; };
+		D55BAD012AE47063002F2406 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BAD022AE47063002F2406 /* Endpoint.swift */; };
+		D55BAD032AE47063002F2406 /* EndpointConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BAD042AE47063002F2406 /* EndpointConnection.swift */; };
+		D55BAD052AE47063002F2406 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55BAD062AE47063002F2406 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,10 @@
 		D55BACD82AE47064002F2406 /* CrabAlertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrabAlertUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55BACDC2AE47064002F2406 /* CrabAlertUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrabAlertUITests.swift; sourceTree = "<group>"; };
 		D55BACDE2AE47064002F2406 /* CrabAlertUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrabAlertUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D55BAD022AE47063002F2406 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		D55BAD042AE47063002F2406 /* EndpointConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointConnection.swift; sourceTree = "<group>"; };
+		D55BAD062AE47063002F2406 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D55BAD072AE47063002F2406 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D55BACED2AE470B4002F2406 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				D55BACC02AE47063002F2406 /* CrabAlertApp.swift */,
+				D55BAD022AE47063002F2406 /* Endpoint.swift */,
+				D55BAD042AE47063002F2406 /* EndpointConnection.swift */,
+				D55BAD062AE47063002F2406 /* SettingsView.swift */,
+				D55BAD072AE47063002F2406 /* Info.plist */,
 				D55BACC42AE47064002F2406 /* Assets.xcassets */,
 				D55BACC92AE47064002F2406 /* CrabAlert.entitlements */,
 				D55BACC62AE47064002F2406 /* Preview Content */,
@@ -145,7 +154,6 @@
 			);
 			name = CrabAlert;
 			packageProductDependencies = (
-				D55BACEC2AE470B4002F2406 /* Starscream */,
 			);
 			productName = CrabAlert;
 			productReference = D55BACBD2AE47063002F2406 /* CrabAlert.app */;
@@ -219,9 +227,6 @@
 				Base,
 			);
 			mainGroup = D55BACB42AE47063002F2406;
-			packageReferences = (
-				D55BACEB2AE470B4002F2406 /* XCRemoteSwiftPackageReference "Starscream" */,
-			);
 			productRefGroup = D55BACBE2AE47063002F2406 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -265,6 +270,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D55BACC12AE47063002F2406 /* CrabAlertApp.swift in Sources */,
+				D55BAD012AE47063002F2406 /* Endpoint.swift in Sources */,
+				D55BAD032AE47063002F2406 /* EndpointConnection.swift in Sources */,
+				D55BAD052AE47063002F2406 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,12 +435,13 @@
 				CODE_SIGN_ENTITLEMENTS = CrabAlert/CrabAlert.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CrabAlert/Preview Content\"";
 				DEVELOPMENT_TEAM = D4PDPKBLXX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CrabAlert/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CrabAlert;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -441,7 +450,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -457,12 +466,13 @@
 				CODE_SIGN_ENTITLEMENTS = CrabAlert/CrabAlert.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CrabAlert/Preview Content\"";
 				DEVELOPMENT_TEAM = D4PDPKBLXX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CrabAlert/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CrabAlert;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -471,7 +481,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yellowredblue.CrabAlert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -591,25 +601,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		D55BACEB2AE470B4002F2406 /* XCRemoteSwiftPackageReference "Starscream" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/daltoniam/Starscream.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.8;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D55BACEC2AE470B4002F2406 /* Starscream */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D55BACEB2AE470B4002F2406 /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D55BACB52AE47063002F2406 /* Project object */;
 }

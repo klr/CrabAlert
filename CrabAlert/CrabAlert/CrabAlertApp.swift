@@ -6,29 +6,8 @@
 //
 
 import SwiftUI
-import Starscream
+import Combine
 import UserNotifications
-
-// MARK: - Incoming Message Struct
-struct IncomingMessage: Codable {
-    let id: String
-    let from: Contact
-    let to: [Contact]
-    let subject: String
-    let time: Int
-    let date: String
-    let size: String
-    let opened: Bool
-    let has_html: Bool
-    let has_plain: Bool
-    let attachments: [String]
-    var body: String?
-    
-    struct Contact: Codable {
-        let name: String?
-        let email: String
-    }
-}
 
 @main
 struct CrabAlertApp: App {
@@ -37,35 +16,142 @@ struct CrabAlertApp: App {
 
     var body: some Scene {
         MenuBarExtra {
-            if crabAlert.isConnected {
-                Button(action: crabAlert.openMailCrabInbox) {
-                    Label {
-                        Text("Connected to MailCrab")
-                    } icon: {
-                        Image(nsImage: CrabAlertModel.statusIndicatorImage(color: .systemGreen))
-                            .renderingMode(.original)
-                    }
-                }
-            } else {
-                Button(action: {}) {
-                    Label {
-                        Text("Waiting for MailCrab...")
-                    } icon: {
-                        Image(nsImage: CrabAlertModel.statusIndicatorImage(color: .systemGray))
-                            .renderingMode(.original)
-                    }
-                }
-                .disabled(true)
-            }
-
-            Divider()
-
-            Button("Quit CrabAlert", action: crabAlert.quitApp)
-                .keyboardShortcut("q")
+            CrabAlertMenu(crabAlert: crabAlert)
         } label: {
-            Label("CrabAlert", systemImage: crabAlert.isConnected ? "envelope.fill" : "envelope")
+            Label("CrabAlert", systemImage: crabAlert.anyConnected ? "envelope.fill" : "envelope")
         }
         .menuBarExtraStyle(.menu)
+
+        Settings {
+            SettingsView(store: crabAlert.store)
+        }
+    }
+}
+
+// MARK: - Menu
+struct CrabAlertMenu: View {
+    @ObservedObject var crabAlert: CrabAlertModel
+    @Environment(\.openSettings) private var openSettings
+
+    var body: some View {
+        let connected = crabAlert.connections.filter(\.isConnected)
+
+        if connected.isEmpty {
+            WaitingRow(indicator: crabAlert.waitingIndicator)
+        } else {
+            ForEach(connected, id: \.endpoint.id) { connection in
+                let endpoint = connection.endpoint
+                Button {
+                    crabAlert.openInbox(for: endpoint)
+                } label: {
+                    statusLabel(endpoint.isDefault ? "Connected to MailCrab" : "Connected to \(endpoint.name)",
+                                color: .systemGreen)
+                }
+            }
+        }
+
+        Divider()
+
+        Button("Settings…") {
+            NSApp.activate(ignoringOtherApps: true)
+            openSettings()
+        }
+        .keyboardShortcut(",")
+
+        Divider()
+
+        Button("Quit CrabAlert", action: crabAlert.quitApp)
+            .keyboardShortcut("q")
+    }
+
+    private func statusLabel(_ title: String, color: NSColor) -> some View {
+        Label {
+            Text(title)
+        } icon: {
+            Image(nsImage: CrabAlertModel.statusIndicatorImage(color: color))
+                .renderingMode(.original)
+        }
+    }
+}
+
+/// "Waiting for MailCrab..." row whose dot slowly pulses between grey and yellow.
+/// Observes only the indicator so the pulse doesn't re-render the rest of the menu.
+struct WaitingRow: View {
+    @ObservedObject var indicator: WaitingIndicator
+
+    var body: some View {
+        Button(action: {}) {
+            Label {
+                Text("Waiting for MailCrab...")
+            } icon: {
+                Image(nsImage: CrabAlertModel.statusIndicatorImage(color: indicator.color))
+                    .renderingMode(.original)
+            }
+        }
+        .disabled(true)
+    }
+}
+
+// MARK: - Waiting Indicator
+final class WaitingIndicator: ObservableObject {
+    static let period: TimeInterval = 2.0
+    private static let grey = NSColor.systemGray.usingColorSpace(.sRGB) ?? .gray
+    private static let yellow = NSColor.systemYellow.usingColorSpace(.sRGB) ?? .yellow
+
+    @Published private(set) var color: NSColor = WaitingIndicator.grey
+
+    private var timer: Timer?
+    private var startDate = Date()
+
+    func start() {
+        guard timer == nil else { return }
+        startDate = Date()
+
+        let timer = Timer(timeInterval: 0.1, repeats: true) { [weak self] _ in
+            self?.tick()
+        }
+        // .common so it keeps firing while the menu is open (event-tracking run loop mode).
+        RunLoop.main.add(timer, forMode: .common)
+        self.timer = timer
+    }
+
+    func stop() {
+        timer?.invalidate()
+        timer = nil
+        color = Self.grey
+    }
+
+    private func tick() {
+        let elapsed = Date().timeIntervalSince(startDate)
+        // 0 → 1 → 0 over one period, eased.
+        let fraction = (1 - cos(elapsed * 2 * .pi / Self.period)) / 2
+        color = Self.grey.blended(withFraction: fraction, of: Self.yellow) ?? Self.grey
+    }
+}
+
+// MARK: - Menu Item Image Visibility
+/// From macOS 27, AppKit hides menu item images unless the item opts in, which would hide
+/// the status dots. SwiftUI has no modifier for this, so opt in on the underlying
+/// NSMenuItems as SwiftUI adds them or changes their image.
+enum MenuItemImageVisibility {
+    private static var observers: [NSObjectProtocol] = []
+
+    static func install() {
+        guard #available(macOS 27.0, *), observers.isEmpty else { return }
+
+        let names: [Notification.Name] = [NSMenu.didAddItemNotification, NSMenu.didChangeItemNotification]
+        observers = names.map { name in
+            NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) { note in
+                guard let menu = note.object as? NSMenu,
+                      let index = note.userInfo?["NSMenuItemIndex"] as? Int,
+                      menu.items.indices.contains(index) else { return }
+
+                let item = menu.items[index]
+                if item.image != nil, item.preferredImageVisibility != .visible {
+                    item.preferredImageVisibility = .visible
+                }
+            }
+        }
     }
 }
 
@@ -73,6 +159,7 @@ struct CrabAlertApp: App {
 class WindowlessAppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApplication.shared.setActivationPolicy(.accessory)
+        MenuItemImageVisibility.install()
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -85,31 +172,85 @@ class WindowlessAppDelegate: NSObject, NSApplicationDelegate {
 }
 
 // MARK: - CrabAlert Controller
-class CrabAlertModel: NSObject, ObservableObject {
-    private let mailCrabInboxURL = URL(string: "http://localhost:1080/")!
-    private var socket: WebSocket?
-    private var reconnectTimer: Timer?
+final class CrabAlertModel: NSObject, ObservableObject {
+    let store: EndpointStore
+    let waitingIndicator = WaitingIndicator()
 
-    @Published var isConnected = false
+    @Published private(set) var connections: [EndpointConnection] = []
+
+    private var reconnectTimer: Timer?
+    private var storeSubscription: AnyCancellable?
+    private var connectionSubscriptions: [UUID: AnyCancellable] = [:]
+
+    var anyConnected: Bool { connections.contains(where: \.isConnected) }
 
     // MARK: - Lifecycle
-    override init() {
+    init(store: EndpointStore = EndpointStore()) {
+        self.store = store
         super.init()
         setupNotifications()
-        connect()
+
+        // $custom emits the current value immediately, which creates the initial connections.
+        storeSubscription = store.$custom
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] custom in
+                self?.syncConnections(with: [.default] + custom)
+            }
 
         reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
-            guard let self else { return }
-
-            if !self.isConnected {
-                self.connect()
-            }
+            self?.connections
+                .filter { !$0.isConnected }
+                .forEach { $0.connect() }
         }
     }
 
     deinit {
         reconnectTimer?.invalidate()
-        socket?.disconnect()
+        connections.forEach { $0.disconnect() }
+    }
+
+    /// Reconciles live connections with the configured endpoints: keeps unchanged ones,
+    /// disconnects removed ones and connects new ones.
+    private func syncConnections(with endpoints: [Endpoint]) {
+        let existing = Dictionary(uniqueKeysWithValues: connections.map { ($0.endpoint.id, $0) })
+
+        let updated = endpoints.map { endpoint -> EndpointConnection in
+            if let connection = existing[endpoint.id], connection.endpoint == endpoint {
+                return connection
+            }
+
+            let connection = EndpointConnection(endpoint: endpoint)
+            connection.onMessage = { [weak self] message, endpoint in
+                self?.showNotification(with: message, from: endpoint)
+            }
+            connectionSubscriptions[endpoint.id] = connection.objectWillChange
+                .sink { [weak self] _ in
+                    self?.objectWillChange.send()
+                    // objectWillChange fires before the value changes; read it afterwards.
+                    DispatchQueue.main.async { self?.updateWaitingIndicator() }
+                }
+            connection.connect()
+            return connection
+        }
+
+        let keptIDs = Set(updated.map { ObjectIdentifier($0) })
+        for connection in connections where !keptIDs.contains(ObjectIdentifier(connection)) {
+            connection.disconnect()
+            if !endpoints.contains(where: { $0.id == connection.endpoint.id }) {
+                connectionSubscriptions[connection.endpoint.id] = nil
+            }
+        }
+
+        connections = updated
+        updateWaitingIndicator()
+    }
+
+    private func updateWaitingIndicator() {
+        if anyConnected {
+            waitingIndicator.stop()
+        } else {
+            waitingIndicator.start()
+        }
     }
 
     // MARK: - Menu Bar Handling
@@ -125,29 +266,14 @@ class CrabAlertModel: NSObject, ObservableObject {
         return image
     }
 
-    func openMailCrabInbox() {
-        NSWorkspace.shared.open(mailCrabInboxURL)
+    func openInbox(for endpoint: Endpoint) {
+        NSWorkspace.shared.open(endpoint.inboxURL)
     }
 
     func quitApp() {
         NSApplication.shared.terminate(self)
     }
-    
-    // MARK: - Web Socket Interaction
-    func connect() {
-        let request = URLRequest(url: URL(string: "ws://localhost:1080/ws")!)
-        let socket = WebSocket(request: request)
-        socket.delegate = self
-        self.socket = socket
-        socket.connect()
-    }
 
-    func setConnectionState(_ connected: Bool) {
-        DispatchQueue.main.async {
-            self.isConnected = connected
-        }
-    }
-    
     // MARK: - Notifications
     func setupNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
@@ -155,17 +281,20 @@ class CrabAlertModel: NSObject, ObservableObject {
                 print("Error requesting notification permissions: \(error.localizedDescription)")
             }
         }
-        
+
         // Delegate notification actions to self
         UNUserNotificationCenter.current().delegate = self
     }
-    
-    func showNotification(with message: IncomingMessage) {
+
+    func showNotification(with message: IncomingMessage, from endpoint: Endpoint) {
         let content = UNMutableNotificationContent()
         content.title = message.subject
-        content.subtitle = "From: \(message.from.email)"
+        content.subtitle = store.custom.isEmpty
+            ? "From: \(message.from.email)"
+            : "\(endpoint.name) · From: \(message.from.email)"
         content.body = message.body ?? ""
-        content.userInfo = ["url": mailCrabInboxURL.absoluteString]
+        content.userInfo = ["url": endpoint.inboxURL.absoluteString]
+        content.threadIdentifier = endpoint.id.uuidString
         content.sound = UNNotificationSound.default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
@@ -175,116 +304,6 @@ class CrabAlertModel: NSObject, ObservableObject {
             if let error = error {
                 print("Error showing notification: \(error.localizedDescription)")
             }
-        }
-    }
-    
-    func parseIncomingMessage(data: Data) -> IncomingMessage? {
-        let decoder = JSONDecoder()
-        do {
-            let message = try decoder.decode(IncomingMessage.self, from: data)
-            return message
-        } catch {
-            print("Error parsing JSON: \(error)")
-            return nil
-        }
-    }
-    
-    func fetchMessageBody(for id: String, completion: @escaping (String?, Error?) -> Void) {
-        let baseURL = "http://localhost:1080/api/message"
-        let url = URL(string: "\(baseURL)/\(id)/body")!
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            guard let data = data,
-                  let body = String(data: data, encoding: .utf8) else {
-                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch body"]))
-                return
-            }
-            
-            completion(body, nil)
-        }
-        
-        task.resume()
-    }
-    
-    func convertHTMLToPlainText(html: String) -> String? {
-        guard let data = html.data(using: .utf8) else {
-            return nil
-        }
-
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-
-        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
-            return nil
-        }
-
-        // Replace newlines with spaces and trim whitespace
-        let plainText = attributedString.string
-            .replacingOccurrences(of: "\n", with: " ")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        // Limit to 200 characters
-        return plainText.count > 200 ? String(plainText.prefix(200)) : plainText
-    }
-
-}
-
-// MARK: - WebSocketDelegate
-extension CrabAlertModel: WebSocketDelegate {
-    func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
-        switch event {
-        case .connected(let headers):
-            print("websocket is connected: \(headers)")
-
-            setConnectionState(true)
-        case .disconnected(let reason, let code):
-            print("websocket is disconnected: \(reason) with code: \(code)")
-
-            setConnectionState(false)
-        case .text(let text):
-            print("Received text: \(text)")
-            
-            if let data = text.data(using: .utf8), var message = parseIncomingMessage(data: data) {
-                fetchMessageBody(for: message.id) { (body, error) in
-                    if let error = error {
-                        print("Error fetching body: \(error)")
-                    } else if let body = body {
-                        if let plainText = self.convertHTMLToPlainText(html: body) {
-                            message.body = plainText
-                            self.showNotification(with: message)
-                        }
-                    }
-                }
-            }
-        case .binary(let data):
-            print("Received data: \(data.count)")
-        case .ping:
-            break
-        case .pong:
-            break
-        case .viabilityChanged(let isViable):
-            print("Network viability changed: \(isViable)")
-        case .reconnectSuggested(let shouldReconnect):
-            print("Reconnect suggested: \(shouldReconnect)")
-        case .cancelled:
-            print("Websocket was cancelled")
-
-            setConnectionState(false)
-        case .error(let error):
-            print("Error: \(error?.localizedDescription ?? "Unknown error")")
-
-            setConnectionState(false)
-        case .peerClosed:
-            print("Peer closed")
-            
-            setConnectionState(false)
         }
     }
 }
