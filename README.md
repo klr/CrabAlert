@@ -24,7 +24,7 @@ It writes `screenshots/app-store-2880x1800.png`. By default it uses the dynamic 
 
 ## Releasing
 
-Bump `MARKETING_VERSION` for a new release and leave the build number (`CURRENT_PROJECT_VERSION`) at `1`. App Store Connect assigns the next free build number on upload:
+Bump `MARKETING_VERSION` for a new release. On macOS the build number (`CURRENT_PROJECT_VERSION`) must keep increasing across every version ever uploaded, so never reset it. App Store Connect can raise it to the next free number on upload:
 
 - **Xcode Organizer**: Archive, then Distribute App → App Store Connect, and keep **Manage Version and Build Number** ticked.
 - **Command line**:
