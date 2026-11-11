@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mailcrab:
-    image: marlonb/mailcrab:latest
+    image: marlonb/mailcrab:v1.8.0
     restart: always
     ports:
       - '1080:1080'
